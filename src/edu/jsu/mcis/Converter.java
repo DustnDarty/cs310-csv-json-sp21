@@ -72,13 +72,14 @@ public class Converter {
             JSONArray col = new JSONArray();
             JSONArray row = new JSONArray();
             JSONArray data = new JSONArray();
-            JSONArray holder = new JSONArray();
+            JSONArray holder;
             String[] record = iterator.next();
             
             for(int i = 0; i < record.length; i++){
                 col.add(record[i]);
             }
             while(iterator.hasNext()){
+                holder = new JSONArray();
                 record = iterator.next();
                 row.add(record[0]);
                 for(int i = 1; i < record.length; i++){
@@ -108,6 +109,12 @@ public class Converter {
             CSVWriter csvWriter = new CSVWriter(writer, ',', '"', '\n');
             
             // INSERT YOUR CODE HERE
+            JSONParser parser = new JSONParser();
+            JSONObject json = (JSONObject)parser.parse(jsonString);
+            JSONArray col = (JSONArray)json.get("colHeaders");
+            JSONArray row = (JSONArray)json.get("rowHeaders");
+            JSONArray data = (JSONArray)json.get("data");
+            
             
         }
         
